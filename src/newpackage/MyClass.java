@@ -13,19 +13,19 @@ import org.openqa.selenium.support.ui.Select;
 public class MyClass {
 
     public static void main(String[] args){
-            //////////////////////////
-            //declaration of variables
-            //////////////////////////
+            /////////////////////////////////////////////////////////////////
+            //declaration of variables & launches browser
+            /////////////////////////////////////////////////////////////////
             System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
             WebDriver driver = new ChromeDriver();
-            WebDriverWait waiting = new WebDriverWait(driver,10);
+            WebDriverWait waiting = new WebDriverWait(driver,5);
             String baseUrl = "http://bestbuy.ca/en-ca";
-
-            /////////////////////////////////////////
-            //launch the browser and searching for PS5
-            //////////////////////////////////////////
             driver.get(baseUrl);
             WebElement search = driver.findElement(By.name("search"));
+
+            ///////////////////////////////
+            //searches for PS5
+            ///////////////////////////////
             search.sendKeys("PS5");
             search.submit();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -33,16 +33,37 @@ public class MyClass {
             //////////////////////////////////////
             //Selecting Console and adding to cart
             //////////////////////////////////////
-            //WebElement console = driver.findElement(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']"));
-            WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
-            //console.click();
-            controller.click();
+            WebElement console = driver.findElement(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']"));
+            //WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
+            console.click();
+            //controller.click();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
             if (addToCart.isEnabled()){
                 System.out.println("Enabled");
             } else {
                 System.out.println("Disabled");
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////
+            //forever loop that checks if the add to cart button is enabled or not///
+            //if its not enabled the console will write disabled ///////////////////
+            // and will wait 2 minutes for the page to refresh/////////////////////
+            //if enabled the rest of the code resumes normally////////////////////
+            /////////////////////////////////////////////////////////////////////
+            for ( ; ; ) {
+
+                    if ( addToCart.isEnabled()){
+                            break;
+                    }
+                    else {
+                            driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+                            driver.navigate().refresh();
+                            waiting.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//button[contains(.,'Add to Cart')]")));
+                            addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
+                            System.out.println("Disabled");
+                    }
             }
             addToCart.click();
 
@@ -63,6 +84,7 @@ public class MyClass {
             waiting.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[3]/div/div/div/div[2]/div/div[2]")));
             WebElement guest = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[3]/div/div/div/div[2]/div/div[2]/a"));
             guest.click();
+
 
             /////////////////
             //Shipping Screen
@@ -85,6 +107,8 @@ public class MyClass {
             WebElement city = driver.findElement(By.id("city"));
             city.sendKeys("Hamilton");
             con.click();
+
+
 
             ////////////////////
             //Credit Card Screen
