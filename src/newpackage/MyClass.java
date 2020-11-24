@@ -7,12 +7,109 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.Select;
+import java.awt.Container;
+import javax.swing.*;
+
 
 ///Naser Abdulrahman
 
 public class MyClass {
 
+    public static void personalInformation(){
+            JFrame parent = new JFrame("Personal Information");
+            JButton button = new JButton("Submit");
+            JLabel label = new JLabel();
+            label.setText("Enter name");
+
+    }
+
+
     public static void main(String[] args){
+            final JFrame parent = new JFrame("Personal Information");
+            parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            parent.setBounds(0,0,400,600);
+            Container container = parent.getContentPane();
+            container.setLayout(null);
+
+            JLabel name = new JLabel("First Name: ");
+            name.setBounds(20,30,250,30);
+            JTextField name1 = new JTextField();
+            name1.setBounds(100,30,250,30);
+
+            JLabel lastName = new JLabel("Last Name");
+            lastName.setBounds(20,60,250,30);
+            JTextField last1 = new JTextField();
+            last1.setBounds(100,60,250,30);
+
+            JLabel address = new JLabel("Address: ");
+            address.setBounds(20,90,250,30);
+            JTextField add1 = new JTextField();
+            add1.setBounds(100,90,250,30);
+
+            JLabel province = new JLabel("Province");
+            province.setBounds(20,120,250,30);
+            JTextField prov1 = new JTextField("Ontario");
+            prov1.setBounds(100,120,250,30);
+
+            JLabel postalCode = new JLabel("Postal Code");
+            postalCode.setBounds(20,150,250,30);
+            JTextField post = new JTextField();
+            post.setBounds(100,150,250,30);
+
+            JLabel phone = new JLabel("Phone Number");
+            phone.setBounds(20,180,250,30);
+            JTextField phone1 = new JTextField();
+            phone1.setBounds(100,180,250,30);
+
+            JLabel ccInfo = new JLabel("Credit Card #");
+            ccInfo.setBounds(20,210,250,30);
+            JTextField ccInfo1 = new JTextField();
+            ccInfo1.setBounds(100,210,250,30);
+
+            JLabel expMonth = new JLabel("Exp. Month");
+            expMonth.setBounds(20,240,250,30);
+            JTextField expMonth1 = new JTextField();
+            expMonth1.setBounds(100,240,250,30);
+
+            JLabel expYear = new JLabel("Exp. Year");
+            expYear.setBounds(20,270,250,30);
+            JTextField expYear1 = new JTextField();
+            expYear1.setBounds(100,270,250,30);
+
+            JLabel ccv = new JLabel("ccv");
+            ccv.setBounds(20,300,250,30);
+            JTextField ccv1 = new JTextField();
+            ccv1.setBounds(100,300,250,30);
+
+            JButton button = new JButton("Submit");
+            button.setBounds(100,500,100,30);
+
+            container.add(name);
+            container.add(lastName);
+            container.add(address);
+            container.add(province);
+            container.add(postalCode);
+            container.add(phone);
+            container.add(name1);
+            container.add(last1);
+            container.add(add1);
+            container.add(prov1);
+            container.add(post);
+            container.add(phone1);
+            container.add(ccInfo);
+            container.add(ccInfo1);
+            container.add(expMonth);
+            container.add(expMonth1);
+            container.add(expYear);
+            container.add(expYear1);
+            container.add(ccv);
+            container.add(ccv1);
+            container.add(button);
+
+            parent.setVisible(true);
+
+
+            /*
             /////////////////////////////////////////////////////////////////
             //declaration of variables & launches browser
             /////////////////////////////////////////////////////////////////
@@ -39,17 +136,12 @@ public class MyClass {
             //controller.click();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
-            if (addToCart.isEnabled()){
-                System.out.println("Enabled");
-            } else {
-                System.out.println("Disabled");
-            }
 
 
             //////////////////////////////////////////////////////////////////////////
             //forever loop that checks if the add to cart button is enabled or not///
             //if its not enabled the console will write disabled ///////////////////
-            // and will wait 2 minutes for the page to refresh/////////////////////
+            // and will wait 1 minute for the page to refresh//////////////////////
             //if enabled the rest of the code resumes normally////////////////////
             /////////////////////////////////////////////////////////////////////
             for ( ; ; ) {
@@ -128,7 +220,7 @@ public class MyClass {
             ////////////////////////
             //closes the application
             ////////////////////////
-            // driver.close();
+            // driver.close();*/
     }
 
 }
