@@ -68,19 +68,19 @@ public class MyClass {
             //Shipping Screen
             /////////////////
             WebElement email = driver.findElement(By.id("email"));
-            email.sendKeys("abdul.naser724@gmail.com");
+            email.sendKeys("fake.email@gmail.com");
             WebElement FName = driver.findElement(By.id("firstName"));
             FName.sendKeys("Naser");
             WebElement lastName = driver.findElement(By.id("lastName"));
             lastName.sendKeys("Abdulrahman");
             WebElement address = driver.findElement(By.id("addressLine"));
-            address.sendKeys("313 Mohawk Road East");
+            address.sendKeys("374 Mohawk Rd E");
             Select province = new Select(driver.findElement(By.id("regionCode")));
             province.selectByVisibleText("Ontario");
             WebElement postal = driver.findElement(By.id("postalCode"));
-            postal.sendKeys("L9A 2J5");
+            postal.sendKeys("L8V 2H7");
             WebElement phone = driver.findElement(By.id("phone"));
-            phone.sendKeys("905-348-9803");
+            phone.sendKeys("905-999-9999");
             WebElement con = driver.findElement(By.xpath("//button[contains(.,'Continue')]"));
             WebElement city = driver.findElement(By.id("city"));
             city.sendKeys("Hamilton");
