@@ -15,16 +15,9 @@ import javax.swing.*;
 
 public class MyClass {
 
-    public static void personalInformation(){
-            JFrame parent = new JFrame("Personal Information");
-            JButton button = new JButton("Submit");
-            JLabel label = new JLabel();
-            label.setText("Enter name");
-
-    }
-
-
     public static void main(String[] args){
+
+            /*
             final JFrame parent = new JFrame("Personal Information");
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             parent.setBounds(0,0,400,600);
@@ -36,18 +29,18 @@ public class MyClass {
             JTextField name1 = new JTextField();
             name1.setBounds(100,30,250,30);
 
-            JLabel lastName = new JLabel("Last Name");
-            lastName.setBounds(20,60,250,30);
+            JLabel last_name = new JLabel("Last Name");
+            last_name.setBounds(20,60,250,30);
             JTextField last1 = new JTextField();
             last1.setBounds(100,60,250,30);
 
-            JLabel address = new JLabel("Address: ");
-            address.setBounds(20,90,250,30);
+            JLabel uaddress = new JLabel("Address: ");
+            uaddress.setBounds(20,90,250,30);
             JTextField add1 = new JTextField();
             add1.setBounds(100,90,250,30);
 
-            JLabel province = new JLabel("Province");
-            province.setBounds(20,120,250,30);
+            JLabel uprovince = new JLabel("Province");
+            uprovince.setBounds(20,120,250,30);
             JTextField prov1 = new JTextField("Ontario");
             prov1.setBounds(100,120,250,30);
 
@@ -56,8 +49,8 @@ public class MyClass {
             JTextField post = new JTextField();
             post.setBounds(100,150,250,30);
 
-            JLabel phone = new JLabel("Phone Number");
-            phone.setBounds(20,180,250,30);
+            JLabel uphone = new JLabel("Phone Number");
+            uphone.setBounds(20,180,250,30);
             JTextField phone1 = new JTextField();
             phone1.setBounds(100,180,250,30);
 
@@ -85,11 +78,11 @@ public class MyClass {
             button.setBounds(100,500,100,30);
 
             container.add(name);
-            container.add(lastName);
-            container.add(address);
-            container.add(province);
+            container.add(last_name);
+            container.add(uaddress);
+            container.add(uprovince);
             container.add(postalCode);
-            container.add(phone);
+            container.add(uphone);
             container.add(name1);
             container.add(last1);
             container.add(add1);
@@ -107,9 +100,9 @@ public class MyClass {
             container.add(button);
 
             parent.setVisible(true);
+*/
 
 
-            /*
             /////////////////////////////////////////////////////////////////
             //declaration of variables & launches browser
             /////////////////////////////////////////////////////////////////
@@ -220,7 +213,7 @@ public class MyClass {
             ////////////////////////
             //closes the application
             ////////////////////////
-            // driver.close();*/
+            // driver.close();
     }
 
 }
