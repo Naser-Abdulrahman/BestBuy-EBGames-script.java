@@ -145,7 +145,7 @@ public class MyClass extends DocumentFilter{
                 ////////////////////////
                 //closes the application
                 ////////////////////////
-                // driver.close();
+                //driver.close(); //uncomment this line to close the application after checkout
 
 
         }
