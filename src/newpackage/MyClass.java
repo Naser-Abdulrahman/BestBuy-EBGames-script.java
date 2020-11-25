@@ -53,7 +53,7 @@ public class MyClass extends DocumentFilter{
                // WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
                 console.click();
                 //controller.click();
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                 WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
 
 
