@@ -26,7 +26,6 @@ public class MyClass extends DocumentFilter{
         private static String eyear;
         private static String cvv;
         private static String ucity;
-        private static String email;
 
 
         public static void buyPS5(){
@@ -35,7 +34,7 @@ public class MyClass extends DocumentFilter{
                 /////////////////////////////////////////////////////////////////
                 System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
                 WebDriver driver = new ChromeDriver();
-                WebDriverWait waiting = new WebDriverWait(driver,5);
+                WebDriverWait waiting = new WebDriverWait(driver,10);
                 String baseUrl = "http://bestbuy.ca/en-ca";
                 driver.get(baseUrl);
                 WebElement search = driver.findElement(By.name("search"));
@@ -45,15 +44,15 @@ public class MyClass extends DocumentFilter{
                 ///////////////////////////////
                 search.sendKeys("PS5");
                 search.submit();
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                waiting.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']")));
 
                 //////////////////////////////////////
                 //Selecting Console and adding to cart
                 //////////////////////////////////////
-               // WebElement console = driver.findElement(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']"));
-                WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
-               // console.click();
-                controller.click();
+                WebElement console = driver.findElement(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']"));
+               // WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
+                console.click();
+                //controller.click();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
 
@@ -140,8 +139,8 @@ public class MyClass extends DocumentFilter{
                 //////////////////
                 //Checkout Screen/
                 //////////////////
-                waiting.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(.,'Place Order'")));
-                driver.findElement(By.xpath("//button[contains(.,'Place Order'")).click();
+                waiting.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"posElement\"]/section/section[1]/button")));
+                driver.findElement(By.xpath("//*[@id=\"posElement\"]/section/section[1]/button")).click();
 
                 ////////////////////////
                 //closes the application
@@ -152,25 +151,28 @@ public class MyClass extends DocumentFilter{
         }
     public static void main(String[] args){
 
-            final JFrame parent = new JFrame("Personal Information");
+            ///////////////////////////
+            //GUI for user information/
+            ///////////////////////////
+            final JFrame parent = new JFrame("User Information");
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            parent.setBounds(0,0,400,600);
+            parent.setBounds(500,300,400,600);
             Container container = parent.getContentPane();
             container.setLayout(null);
 
             JLabel name = new JLabel("First Name: ");
             name.setBounds(20,30,250,30);
-            JTextField name1 = new JTextField();
+            JTextField name1 = new JTextField("First");
             name1.setBounds(100,30,250,30);
 
             JLabel last_name = new JLabel("Last Name");
             last_name.setBounds(20,60,250,30);
-            JTextField last1 = new JTextField();
+            JTextField last1 = new JTextField("Last");
             last1.setBounds(100,60,250,30);
 
             JLabel uaddress = new JLabel("Address: ");
             uaddress.setBounds(20,90,250,30);
-            JTextField add1 = new JTextField();
+            JTextField add1 = new JTextField("999 Upper Wentworth St");
             add1.setBounds(100,90,250,30);
 
             JLabel uprovince = new JLabel("Province");
@@ -180,48 +182,49 @@ public class MyClass extends DocumentFilter{
 
             JLabel town = new JLabel("City");
             town.setBounds(20,150,250,30);
-            JTextField townl = new JTextField();
+            JTextField townl = new JTextField("Hamilton");
             townl.setBounds(100,150,250,30);
 
             JLabel postalCode = new JLabel("Postal Code");
             postalCode.setBounds(20,180,250,30);
-            JTextField post = new JTextField();
+            JTextField post = new JTextField("L9A 4X5");
             post.setBounds(100,180,250,30);
 
             JLabel uphone = new JLabel("Phone Number");
             uphone.setBounds(20,210,250,30);
-            JTextField phone1 = new JTextField();
+            JTextField phone1 = new JTextField("9053874455");
             phone1.setBounds(100,210,250,30);
             ((AbstractDocument)phone1.getDocument()).setDocumentFilter(new DocumentFilter(){});
 
             JLabel ccInfo = new JLabel("Credit Card #");
             ccInfo.setBounds(20,240,250,30);
-            JTextField ccInfo1 = new JTextField();
+            JTextField ccInfo1 = new JTextField("4111111111111111");
             ccInfo1.setBounds(100,240,250,30);
 
             JLabel expMonth = new JLabel("Exp. Month");
             expMonth.setBounds(20,270,250,30);
-            JTextField expMonth1 = new JTextField();
+            JTextField expMonth1 = new JTextField("12");
             expMonth1.setBounds(100,270,250,30);
 
             JLabel expYear = new JLabel("Exp. Year");
             expYear.setBounds(20,300,250,30);
-            JTextField expYear1 = new JTextField();
+            JTextField expYear1 = new JTextField("2030");
             expYear1.setBounds(100,300,250,30);
 
             JLabel ccv = new JLabel("ccv");
             ccv.setBounds(20,330,250,30);
-            JTextField ccv1 = new JTextField();
+            JTextField ccv1 = new JTextField("123");
             ccv1.setBounds(100,330,250,30);
 
             JLabel em = new JLabel("email");
             em.setBounds(20,360,250,30);
-            JTextField em1 = new JTextField();
+            JTextField em1 = new JTextField("youremail@domain.com");
             em1.setBounds(100,360,250,30);
 
             JButton button = new JButton("Submit");
             button.setBounds(100,500,100,30);
             button.addActionListener(e -> {
+
                     fname = name1.getText();
                     lname = last1.getText();
                     addy = add1.getText();
@@ -234,8 +237,9 @@ public class MyClass extends DocumentFilter{
                     eyear = expYear1.getText();
                     cvv = ccv1.getText();
                     ucity = townl.getText();
-                    buyPS5();
                     parent.dispose();
+                    buyPS5();
+
             });
 
             container.add(name);
