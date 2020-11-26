@@ -7,10 +7,7 @@ import java.awt.Container;
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
-
-
 ///Naser Abdulrahman
-
 
 public class MyClass extends DocumentFilter{
 
