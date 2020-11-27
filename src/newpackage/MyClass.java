@@ -25,36 +25,20 @@ public class MyClass extends DocumentFilter{
         private static String ucity;
         private static String url;
 
-
-        public static void buyPS5(){
-                /////////////////////////////////////////////////////////////////
-                //declaration of variables & launches browser
-                /////////////////////////////////////////////////////////////////
-                System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-                WebDriver driver = new ChromeDriver();
-                WebDriverWait waiting = new WebDriverWait(driver,10);
-                String baseUrl = "http://bestbuy.ca/en-ca";
-                driver.get(baseUrl);
+        /*
+        This method will search for PS5 then depending on the radiobutton choice, will search for that specific console.
+         */
+        public static void chooseConsole(WebDriver driver, WebDriverWait waiting) {
                 WebElement search = driver.findElement(By.name("search"));
-
-                ///////////////////////////////
-                //searches for PS5
-                ///////////////////////////////
                 search.sendKeys("PS5");
                 search.submit();
                 waiting.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']")));
-
-                //////////////////////////////////////
-                //Selecting Console and adding to cart
-                //////////////////////////////////////
                 WebElement console = driver.findElement(By.cssSelector(url));
-               // WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
+                //WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
                 console.click();
-                //controller.click();
+                //controller.click(); Used only in testing the shipping and payment screen since console is sold out
                 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                 WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
-
-
                 //////////////////////////////////////////////////////////////////////////
                 //forever loop that checks if the add to cart button is enabled or not///
                 //if its not enabled the console will write disabled ///////////////////
@@ -75,10 +59,12 @@ public class MyClass extends DocumentFilter{
                         }
                 }
                 addToCart.click();
-
-                //////////////
-                //Checking out
-                //////////////
+        }
+        /*
+        This method checks out the console, then will wait for the "item has been added to cart" notification, then will continue to the cart
+        and select self checkout. Without the wait, we can go to the cart before BestBuy processes and adds it. And will checkout with nothing
+         */
+        private static void checkout (WebDriver driver, WebDriverWait waiting) {
                 waiting.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div/div[4]/div[1]/div/div/div[1]/div/div/p")));
                 WebElement checkout = driver.findElement(By.xpath("//header/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/a[1]"));
                 checkout.click();
@@ -86,18 +72,14 @@ public class MyClass extends DocumentFilter{
                 waiting.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div/div[4]/div[2]/div[2]/section/div/section/section[2]/div[2]/div/a")));
                 WebElement contin = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[4]/div[2]/div[2]/section/div/section/section[2]/div[2]/div/a"));
                 contin.click();
-
-                ////////////////
-                //Guest Checkout
-                ////////////////
                 waiting.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[3]/div/div/div/div[2]/div/div[2]")));
                 WebElement guest = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[3]/div/div/div/div[2]/div/div[2]/a"));
                 guest.click();
-
-
-                /////////////////
-                //Shipping Screen
-                /////////////////
+        }
+        /*
+        Adds the user information from the GUI to the shipping screen
+         */
+        public static void shipping(WebDriver driver){
                 WebElement email = driver.findElement(By.id("email"));
                 email.sendKeys(uemail);
                 WebElement FName = driver.findElement(By.id("firstName"));
@@ -116,12 +98,11 @@ public class MyClass extends DocumentFilter{
                 ecity.sendKeys(ucity);
                 WebElement con = driver.findElement(By.xpath("//button[contains(.,'Continue')]"));
                 con.click();
-
-
-
-                ////////////////////
-                //Credit Card Screen
-                ///////////////////
+        }
+        /*
+        Adds the payment information and checks out
+         */
+        public static void payment(WebDriver driver, WebDriverWait waiting){
                 waiting.until(ExpectedConditions.elementToBeClickable(By.id("shownCardNumber")));
                 WebElement cardNumber = driver.findElement(By.id("shownCardNumber"));
                 cardNumber.sendKeys(cc);
@@ -133,13 +114,25 @@ public class MyClass extends DocumentFilter{
                 ecvv.sendKeys(cvv);
                 WebElement con2 = driver.findElement(By.xpath("//button[contains(.,'Continue')]"));
                 con2.click();
-
-                //////////////////
-                //Checkout Screen/
-                //////////////////
                 waiting.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"posElement\"]/section/section[1]/button")));
                 driver.findElement(By.xpath("//*[@id=\"posElement\"]/section/section[1]/button")).click();
-
+        }
+        /*
+        Loads the website and calls the other methods
+         */
+        public static void buyPS5(){
+                /////////////////////////////////////////////////////////////////
+                //declaration of variables & launches browser
+                /////////////////////////////////////////////////////////////////
+                System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+                WebDriver driver = new ChromeDriver();
+                WebDriverWait waiting = new WebDriverWait(driver,10);
+                String baseUrl = "http://bestbuy.ca/en-ca";
+                driver.get(baseUrl);
+                chooseConsole(driver,waiting);
+                checkout(driver,waiting);
+                shipping(driver);
+                payment(driver,waiting);
                 ////////////////////////
                 //closes the application
                 ////////////////////////
@@ -147,7 +140,8 @@ public class MyClass extends DocumentFilter{
 
 
         }
-    public static void main(String[] args){
+
+        public static void main(String[] args){
 
             ///////////////////////////
             //GUI for user information/
