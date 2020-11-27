@@ -1,6 +1,6 @@
-idea/
+.idea/
 out/
 src/META-INF
 src/.MyClsss.class
-debug.log
-WebDriver.iml
+/debug.log
+/WebDriver.iml
