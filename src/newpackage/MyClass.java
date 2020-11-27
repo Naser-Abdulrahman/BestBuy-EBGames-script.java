@@ -28,19 +28,9 @@ public class MyClass extends DocumentFilter{
         /*
         This method will search for PS5 then depending on the radiobutton choice, will search for that specific console.
          */
-        public static void chooseConsole(WebDriver driver, WebDriverWait waiting) { /*
-                WebElement search = driver.findElement(By.name("search"));
-                search.sendKeys("PS5");
-                search.submit();
-                waiting.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']")));
-                WebElement console = driver.findElement(By.cssSelector(url));
-                WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
-                //console.click();
-                controller.click(); //Used only in testing the shipping and payment screen since console is sold out
-                */
+        public static void chooseConsole(WebDriver driver, WebDriverWait waiting) {
                 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                 WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
-
                 //////////////////////////////////////////////////////////////////////////
                 //forever loop that checks if the add to cart button is enabled or not///
                 //if its not enabled the console will write disabled ///////////////////
