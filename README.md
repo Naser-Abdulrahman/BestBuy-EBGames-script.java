@@ -1,6 +1,6 @@
 # ps5BestBuy 
 
-To use this program, run the script.bat file. This script needs the chromedriver to run properly, since it uses Selenium WebDriver and chromedriver is needed to run and manipulate Google Chrome.
+To use this program, run the script.bat file. This script needs the chromedriver to run properly, since it uses Selenium WebDriver and chromedriver is needed to run and manipulate Google Chrome. This will not work if you are logged into BestBuy with an account, since it's coded to skip the log in page. Please sign out before running script.
 
 This script will ask for your shipping and payment information, and then launch the BestBuy.ca and search for the PlayStation 5 console. 
 It'll open the product page and try to add it to the cart every minute until available, refreshing the page whenever the add to cart button is disabled. 
