@@ -29,7 +29,7 @@ public class MyClass extends DocumentFilter{
                 /////////////////////////////////////////////////////////////////
                 //declaration of variables & launches browser
                 /////////////////////////////////////////////////////////////////
-                System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver","chromedriver.exe");
                 WebDriver driver = new ChromeDriver();
                 WebDriverWait waiting = new WebDriverWait(driver,10);
                 String baseUrl = "http://bestbuy.ca/en-ca";
