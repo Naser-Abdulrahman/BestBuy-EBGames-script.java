@@ -28,17 +28,19 @@ public class MyClass extends DocumentFilter{
         /*
         This method will search for PS5 then depending on the radiobutton choice, will search for that specific console.
          */
-        public static void chooseConsole(WebDriver driver, WebDriverWait waiting) {
+        public static void chooseConsole(WebDriver driver, WebDriverWait waiting) { /*
                 WebElement search = driver.findElement(By.name("search"));
                 search.sendKeys("PS5");
                 search.submit();
                 waiting.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']")));
                 WebElement console = driver.findElement(By.cssSelector(url));
-                //WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
-                console.click();
-                //controller.click(); Used only in testing the shipping and payment screen since console is sold out
+                WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
+                //console.click();
+                controller.click(); //Used only in testing the shipping and payment screen since console is sold out
+                */
                 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                 WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
+
                 //////////////////////////////////////////////////////////////////////////
                 //forever loop that checks if the add to cart button is enabled or not///
                 //if its not enabled the console will write disabled ///////////////////
@@ -120,7 +122,7 @@ public class MyClass extends DocumentFilter{
         /*
         Loads the website and calls the other methods
          */
-        public static void buyPS5(){
+        public static void buyConsole(){
                 /////////////////////////////////////////////////////////////////
                 //declaration of variables & launches browser
                 /////////////////////////////////////////////////////////////////
@@ -128,7 +130,7 @@ public class MyClass extends DocumentFilter{
                 WebDriver driver = new ChromeDriver();
                 WebDriverWait waiting = new WebDriverWait(driver,10);
                 String baseUrl = "http://bestbuy.ca/en-ca";
-                driver.get(baseUrl);
+                driver.get(url);
                 chooseConsole(driver,waiting);
                 checkout(driver,waiting);
                 shipping(driver);
@@ -216,13 +218,20 @@ public class MyClass extends DocumentFilter{
             ButtonGroup type = new ButtonGroup();
             JRadioButton digital  = new JRadioButton();
             JRadioButton tray = new JRadioButton();
+            JRadioButton serX = new JRadioButton();
+            JRadioButton serS = new JRadioButton();
             digital.setText("PS5 Digital Version");
             tray.setText("PS5 with disk tray, more expensive one");
+            serS.setText("XBOX Series S");
+            serX.setText("XBOX Series X");
             digital.setBounds(20,390,250,30);
             tray.setBounds(20,410,250,30);
+            serS.setBounds(20,430,250,30);
+            serX.setBounds(20,450,250,30);
             type.add(tray);
             type.add(digital);
-
+            type.add(serS);
+            type.add(serX);
 
             JButton button = new JButton("Submit");
             button.setBounds(100,500,100,30);
@@ -241,12 +250,16 @@ public class MyClass extends DocumentFilter{
                     cvv = ccv1.getText();
                     ucity = townl.getText();
                     if (digital.isSelected()){
-                            url = "a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']";
-                    } else {
-                            url = "a[href = '/en-ca/product/playstation-5-console-online-only/14962185']";
+                            url = "https://www.bestbuy.ca/en-ca/product/playstation-5-digital-edition-console-online-only/14962184";
+                    } else if (tray.isSelected()) {
+                            url = "https://www.bestbuy.ca/en-ca/product/playstation-5-console-online-only/14962185";
+                    } else if (serS.isSelected()){
+                            url = "https://www.bestbuy.ca/en-ca/product/xbox-series-s-512gb-console-new-model-online-only/14964950";
+                    } else if (serX.isSelected()){
+                            url = "https://www.bestbuy.ca/en-ca/product/xbox-series-x-1tb-console-new-model-online-only/14964951";
                     }
                     parent.dispose();
-                    buyPS5();
+                    buyConsole();
 
             });
 
@@ -277,6 +290,8 @@ public class MyClass extends DocumentFilter{
             container.add(em1);
             container.add(tray);
             container.add(digital);
+            container.add(serS);
+            container.add(serX);
             parent.setVisible(true);
 
     }
