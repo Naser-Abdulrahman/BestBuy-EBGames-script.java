@@ -23,6 +23,7 @@ public class MyClass extends DocumentFilter{
         private static String eyear;
         private static String cvv;
         private static String ucity;
+        private static String url;
 
 
         public static void buyPS5(){
@@ -46,7 +47,7 @@ public class MyClass extends DocumentFilter{
                 //////////////////////////////////////
                 //Selecting Console and adding to cart
                 //////////////////////////////////////
-                WebElement console = driver.findElement(By.cssSelector("a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']"));
+                WebElement console = driver.findElement(By.cssSelector(url));
                // WebElement controller = driver.findElement(By.cssSelector("a[href = \"/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193\""));
                 console.click();
                 //controller.click();
@@ -218,6 +219,17 @@ public class MyClass extends DocumentFilter{
             JTextField em1 = new JTextField("youremail@domain.com");
             em1.setBounds(100,360,250,30);
 
+            ButtonGroup type = new ButtonGroup();
+            JRadioButton digital  = new JRadioButton();
+            JRadioButton tray = new JRadioButton();
+            digital.setText("PS5 Digital Version");
+            tray.setText("PS5 with disk tray, more expensive one");
+            digital.setBounds(20,390,250,30);
+            tray.setBounds(20,410,250,30);
+            type.add(tray);
+            type.add(digital);
+
+
             JButton button = new JButton("Submit");
             button.setBounds(100,500,100,30);
             button.addActionListener(e -> {
@@ -234,6 +246,11 @@ public class MyClass extends DocumentFilter{
                     eyear = expYear1.getText();
                     cvv = ccv1.getText();
                     ucity = townl.getText();
+                    if (digital.isSelected()){
+                            url = "a[href = '/en-ca/product/playstation-5-digital-edition-console-online-only/14962184']";
+                    } else {
+                            url = "a[href = '/en-ca/product/playstation-5-console-online-only/14962185']";
+                    }
                     parent.dispose();
                     buyPS5();
 
@@ -264,6 +281,8 @@ public class MyClass extends DocumentFilter{
             container.add(townl);
             container.add(em);
             container.add(em1);
+            container.add(tray);
+            container.add(digital);
             parent.setVisible(true);
 
     }
