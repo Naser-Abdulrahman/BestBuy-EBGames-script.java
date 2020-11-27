@@ -1,4 +1,4 @@
-# ps5BestBuy 
+# BestBuy-PS5-XBOX-script
 
 To use this program, run the script.bat file. This script needs the chromedriver to run properly, since it uses Selenium WebDriver and chromedriver is needed to run and manipulate Google Chrome. This will not work if you are logged into BestBuy with an account, since it's coded to skip the log in page. Please sign out before running script.
 
