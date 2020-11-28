@@ -31,12 +31,6 @@ public class MyClass extends DocumentFilter{
         public static void chooseConsole(WebDriver driver, WebDriverWait waiting) {
                 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                 WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
-                //////////////////////////////////////////////////////////////////////////
-                //forever loop that checks if the add to cart button is enabled or not///
-                //if its not enabled the console will write disabled ///////////////////
-                // and will wait 1 minute for the page to refresh//////////////////////
-                //if enabled the rest of the code resumes normally////////////////////
-                /////////////////////////////////////////////////////////////////////
                 for ( ; ; ) {
 
                         if ( addToCart.isEnabled()){
@@ -113,34 +107,22 @@ public class MyClass extends DocumentFilter{
         Loads the website and calls the other methods
          */
         public static void buyConsole(){
-                /////////////////////////////////////////////////////////////////
-                //declaration of variables & launches browser
-                /////////////////////////////////////////////////////////////////
                 System.setProperty("webdriver.chrome.driver","chromedriver.exe");
                 WebDriver driver = new ChromeDriver();
                 WebDriverWait waiting = new WebDriverWait(driver,10);
-                String baseUrl = "http://bestbuy.ca/en-ca";
                 driver.get(url);
                 chooseConsole(driver,waiting);
                 checkout(driver,waiting);
                 shipping(driver);
                 payment(driver,waiting);
-                ////////////////////////
-                //closes the application
-                ////////////////////////
                 //driver.close(); //uncomment this line to close the application after checkout
-
-
         }
 
         public static void main(String[] args){
-
-            ///////////////////////////
-            //GUI for user information/
-            ///////////////////////////
+            //GUI for user information
             final JFrame parent = new JFrame("User Information");
             parent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            parent.setBounds(500,300,400,600);
+            parent.setBounds(500,300,400,700);
             Container container = parent.getContentPane();
             container.setLayout(null);
 
@@ -210,21 +192,27 @@ public class MyClass extends DocumentFilter{
             JRadioButton tray = new JRadioButton();
             JRadioButton serX = new JRadioButton();
             JRadioButton serS = new JRadioButton();
+            JRadioButton other = new JRadioButton();
             digital.setText("PS5 Digital Version");
             tray.setText("PS5 with disk tray, more expensive one");
             serS.setText("XBOX Series S");
             serX.setText("XBOX Series X");
+            other.setText("Other: ");
+            JTextField other1 = new JTextField("https://www.bestbuy.ca/en-ca/product/playstation-5-dualsense-wireless-controller-white/14962193");
             digital.setBounds(20,390,250,30);
             tray.setBounds(20,410,250,30);
             serS.setBounds(20,430,250,30);
-            serX.setBounds(20,450,250,30);
+            serX.setBounds(20,450,110,30);
+            other.setBounds(20,470,100,30);
+            other1.setBounds(130,470,220,30);
             type.add(tray);
             type.add(digital);
             type.add(serS);
             type.add(serX);
+            type.add(other);
 
             JButton button = new JButton("Submit");
-            button.setBounds(100,500,100,30);
+            button.setBounds(100,600,100,30);
             button.addActionListener(e -> {
 
                     fname = name1.getText();
@@ -247,10 +235,11 @@ public class MyClass extends DocumentFilter{
                             url = "https://www.bestbuy.ca/en-ca/product/xbox-series-s-512gb-console-new-model-online-only/14964950";
                     } else if (serX.isSelected()){
                             url = "https://www.bestbuy.ca/en-ca/product/xbox-series-x-1tb-console-new-model-online-only/14964951";
+                    } else {
+                            url = other1.getText();
                     }
                     parent.dispose();
                     buyConsole();
-
             });
 
             container.add(name);
@@ -282,6 +271,8 @@ public class MyClass extends DocumentFilter{
             container.add(digital);
             container.add(serS);
             container.add(serX);
+            container.add(other);
+            container.add(other1);
             parent.setVisible(true);
 
     }
