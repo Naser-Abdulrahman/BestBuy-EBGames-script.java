@@ -18,9 +18,14 @@ public class script {
             WebDriverWait waitEB = new WebDriverWait(eb,10);
             eb.get(url2);
             while (true){
-                if (eb.getCurrentUrl().equals(url2)) break;
-                eb.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-                eb.get(url2);
+                try {
+                    eb.findElement(By.xpath("//body/div[11]/div[1]/button[1]")).click();
+                    break;
+                } catch (Exception e){
+                    System.out.println("No alert");
+                }
+                eb.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+                eb.navigate().refresh();
             }
             ebCheckout(eb,waitEB);
         }
