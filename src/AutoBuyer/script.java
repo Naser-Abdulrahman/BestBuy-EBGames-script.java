@@ -13,7 +13,17 @@ public class script {
     private static WebDriver bb;
     private static WebDriver eb;
 
-
+        public static void bundleAdd(){
+            eb = new ChromeDriver();
+            WebDriverWait waitEB = new WebDriverWait(eb,10);
+            eb.get(url2);
+            while (true){
+                if (eb.getCurrentUrl().equals(url2)) break;
+                eb.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+                eb.get(url2);
+            }
+            ebCheckout(eb,waitEB);
+        }
         public static void oBB () {
             bb = new ChromeDriver();
             WebDriverWait waiting = new WebDriverWait(bb,10);
@@ -69,7 +79,7 @@ public class script {
         /*
         This method will search for PS5 then depending on the radiobutton choice, will search for that specific console.
          */
-        public static void chooseConsole(WebDriver driver, WebDriverWait waiting) {
+    public static void chooseConsole(WebDriver driver, WebDriverWait waiting) {
                 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                 WebElement addToCart = driver.findElement(By.xpath("//button[contains(.,'Add to Cart')]"));
                 for ( ; ; ) {
@@ -203,23 +213,6 @@ public class script {
                 waiting.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"posElement\"]/section/section[1]/button")));
                 driver.findElement(By.xpath("//*[@id=\"posElement\"]/section/section[1]/button")).click();
                 //driver.close();
-        }
-        /*
-        Loads the website and calls the other methods
-         */
-        public static void buyConsole(){
-           //     WebDriver driver = new ChromeDriver();
-                WebDriver driver2 = new ChromeDriver();
-            //    WebDriverWait waiting = new WebDriverWait(driver,10);
-                WebDriverWait waitingEB = new WebDriverWait(driver2,15);
-           //     driver.get(url);
-                driver2.get("https://www.ebgames.ca/PS5/Games/877522");
-                ebCheckout(driver2,waitingEB);
-           //     chooseConsole(driver,waiting);
-           //     checkout(driver,waiting);
-           //     shipping(driver);
-            //    payment(driver,waiting);
-                //driver.close(); //uncomment this line to close the application after checkout
         }
 
         public static void main(String[] args){

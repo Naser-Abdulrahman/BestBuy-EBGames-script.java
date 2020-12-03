@@ -5,7 +5,7 @@ import java.util.Enumeration;
 
 public class itemSelection extends JPanel{
     public final int w = 400;
-    public final int h = 400;
+    public final int h = 600;
     ButtonGroup type = new ButtonGroup();
     ButtonGroup linky = new ButtonGroup();
     JRadioButton digital  = new JRadioButton("digital");
@@ -15,7 +15,12 @@ public class itemSelection extends JPanel{
     JRadioButton other = new JRadioButton("other");
     JRadioButton bbLink = new JRadioButton("BestBuy");
     JRadioButton ebLink = new JRadioButton("EB Games");
+    JRadioButton digitalBundle = new JRadioButton("DB");
+    JRadioButton consoleBundle = new JRadioButton("CB");
+    JLabel source = new JLabel("Please select the domain of the link below");
     JTextField link = new JTextField();
+    JLabel bb = new JLabel("BestBuy");
+    JLabel eb = new JLabel("EB Games");
     final String ps5DBestBuy = "https://www.bestbuy.ca/en-ca/product/playstation-5-digital-edition-console-online-only/14962184";
     final String ps5BestBuy = "https://www.bestbuy.ca/en-ca/product/playstation-5-console-online-only/14962185";
     final String ps5DEBgames = "https://www.ebgames.ca/PS5/Games/877523";
@@ -24,6 +29,9 @@ public class itemSelection extends JPanel{
     final String xboxSBestBuy = "https://www.bestbuy.ca/en-ca/product/xbox-series-s-512gb-console-new-model-online-only/14964950";
     final String xboxSEBGames = "https://www.ebgames.ca/Xbox%20Series%20X/Games/877780";
     final String xboxXEBGames = "https://www.ebgames.ca/Xbox%20Series%20X/Games/877779";
+    final String ps5DBundle = "https://www.ebgames.ca/PS5/Games/877753/";
+    final String ps5Bundle = "https://www.ebgames.ca/PS5/Games/877752/";
+
     public itemSelection() {
         JFrame frame = new JFrame("Item Selection");
         frame.setBounds(300,0,w,h);
@@ -59,27 +67,80 @@ public class itemSelection extends JPanel{
                     case ("other"):
                         other();
                         break;
+                    case ("DB"):
+                        dBundle();
+                        break;
+                    case ("CB"):
+                        cBundle();
+                        break;
                 }
             }
         }
     }
 
     public void buildGUI(){
+        JLabel DB = new JLabel("Digital Bundle ~598.98");
+        DB.setBounds(60, 190, 150, 20);
+        digitalBundle.setBounds(30, 190, 20, 20);
+        digitalBundle.addActionListener(e -> {
+            if (other.isSelected()){
+                link.setVisible(true);
+                bbLink.setVisible(true);
+                ebLink.setVisible(true);
+                source.setVisible(true);
+                bb.setVisible(true);
+                eb.setVisible(true);
+            }
+            else {
+                link.setVisible(false);
+                bbLink.setVisible(false);
+                ebLink.setVisible(false);
+                source.setVisible(false);
+                bb.setVisible(false);
+                eb.setVisible(false);
+            }
+        });
+        JLabel CB = new JLabel("Console Bundle ~$719.98");
+        CB.setBounds(200,190,150,20);
+        consoleBundle.setBounds(180,20,20,20);
+        consoleBundle.addActionListener(e -> {
+            if (other.isSelected()){
+                link.setVisible(true);
+                bbLink.setVisible(true);
+                ebLink.setVisible(true);
+                source.setVisible(true);
+                bb.setVisible(true);
+                eb.setVisible(true);
+            }
+            else {
+                link.setVisible(false);
+                bbLink.setVisible(false);
+                ebLink.setVisible(false);
+                source.setVisible(false);
+                bb.setVisible(false);
+                eb.setVisible(false);
+            }
+        });
+
         JLabel ps5D = new JLabel("Playstation 5 Digital");
         ps5D.setBounds(60,20,150,20);
         digital.setBounds(30,20,20,20);
         digital.addActionListener(e -> {
             if (other.isSelected()){
-                link.setEditable(true);
-                bbLink.setEnabled(true);
-                ebLink.setEnabled(true);
-                System.out.println(needs());
+                link.setVisible(true);
+                bbLink.setVisible(true);
+                ebLink.setVisible(true);
+                source.setVisible(true);
+                bb.setVisible(true);
+                eb.setVisible(true);
             }
             else {
-                link.setEditable(false);
-                bbLink.setEnabled(false);
-                ebLink.setEnabled(false);
-
+                link.setVisible(false);
+                bbLink.setVisible(false);
+                ebLink.setVisible(false);
+                source.setVisible(false);
+                bb.setVisible(false);
+                eb.setVisible(false);
             }
         });
 
@@ -88,14 +149,20 @@ public class itemSelection extends JPanel{
         tray.setBounds(180,20,20,20);
         tray.addActionListener(e -> {
             if (other.isSelected()){
-                link.setEditable(true);
-                bbLink.setEnabled(true);
-                ebLink.setEnabled(true);
+                link.setVisible(true);
+                bbLink.setVisible(true);
+                ebLink.setVisible(true);
+                source.setVisible(true);
+                bb.setVisible(true);
+                eb.setVisible(true);
             }
             else {
-                link.setEditable(false);
-                bbLink.setEnabled(false);
-                ebLink.setEnabled(false);
+                link.setVisible(false);
+                bbLink.setVisible(false);
+                ebLink.setVisible(false);
+                source.setVisible(false);
+                bb.setVisible(false);
+                eb.setVisible(false);
             }
         });
 
@@ -104,14 +171,20 @@ public class itemSelection extends JPanel{
         serS.setBounds(30,60,20,20);
         serS.addActionListener(e -> {
             if (other.isSelected()){
-                link.setEditable(true);
-                bbLink.setEnabled(true);
-                ebLink.setEnabled(true);
+                link.setVisible(true);
+                bbLink.setVisible(true);
+                ebLink.setVisible(true);
+                source.setVisible(true);
+                bb.setVisible(true);
+                eb.setVisible(true);
             }
             else {
-                link.setEditable(false);
-                bbLink.setEnabled(false);
-                ebLink.setEnabled(false);
+                link.setVisible(false);
+                bbLink.setVisible(false);
+                ebLink.setVisible(false);
+                source.setVisible(false);
+                bb.setVisible(false);
+                eb.setVisible(false);
             }
         });
 
@@ -120,14 +193,20 @@ public class itemSelection extends JPanel{
         serX.setBounds(180,60,20,20);
         serX.addActionListener(e -> {
             if (other.isSelected()){
-                link.setEditable(true);
-                bbLink.setEnabled(true);
-                ebLink.setEnabled(true);
+                link.setVisible(true);
+                bbLink.setVisible(true);
+                ebLink.setVisible(true);
+                source.setVisible(true);
+                bb.setVisible(true);
+                eb.setVisible(true);
             }
             else {
-                link.setEditable(false);
-                bbLink.setEnabled(false);
-                ebLink.setEnabled(false);
+                link.setVisible(false);
+                bbLink.setVisible(false);
+                ebLink.setVisible(false);
+                source.setVisible(false);
+                bb.setVisible(false);
+                eb.setVisible(false);
             }
         });
 
@@ -138,36 +217,43 @@ public class itemSelection extends JPanel{
         other.setBounds(30,100,20,20);
         other.addActionListener(e -> {
             if (other.isSelected()){
-                link.setEditable(true);
-                bbLink.setEnabled(true);
-                ebLink.setEnabled(true);
+                link.setVisible(true);
+                bbLink.setVisible(true);
+                ebLink.setVisible(true);
+                source.setVisible(true);
+                bb.setVisible(true);
+                eb.setVisible(true);
             }
             else {
-                link.setEditable(false);
-                bbLink.setEnabled(false);
-                ebLink.setEnabled(false);
+                link.setVisible(false);
+                bbLink.setVisible(false);
+                ebLink.setVisible(false);
+                source.setVisible(false);
+                bb.setVisible(false);
+                eb.setVisible(false);
             }
         });
 
-        JLabel source = new JLabel("Please select the domain of the link below");
         source.setBounds(60,130,250,20);
-        JLabel bb = new JLabel("BestBuy");
         bb.setBounds(60,160,50,20);
         bbLink.setBounds(30,160,20,20);
-        bbLink.setEnabled(false);
-        JLabel eb = new JLabel("EB Games");
         eb.setBounds(150,160,80,20);
         ebLink.setBounds(120,160,20,20);
-        ebLink.setEnabled(false);
+        bb.setVisible(false);
+        eb.setVisible(false);
+        ebLink.setVisible(false);
+        bbLink.setVisible(false);
 
         JButton button = new JButton("Submit");
-        button.setBounds(100,190,100,30);
+        button.setBounds(100,260,100,30);
         button.addActionListener( e -> testtt());
         type.add(digital);
         type.add(tray);
         type.add(serS);
         type.add(serX);
         type.add(other);
+        type.add(digitalBundle);
+        type.add(consoleBundle);
         linky.add(bbLink);
         linky.add(ebLink);
         add(digital);
@@ -187,6 +273,10 @@ public class itemSelection extends JPanel{
         add(link);
         add(source);
         add(button);
+        add(digitalBundle);
+        add(consoleBundle);
+        add(CB);
+        add(DB);
     }
 
     public void ps5Digital() {
@@ -228,4 +318,12 @@ public class itemSelection extends JPanel{
         }
     }
 
+    public void dBundle() {
+        script.url2 = ps5DBundle;
+        script.bundleAdd();
+    }
+    public void cBundle(){
+        script.url2 = ps5Bundle;
+        script.bundleAdd();
+    }
 }
