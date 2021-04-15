@@ -23,3 +23,8 @@ The Credit Card number is a fake, it was used only in testing. To try yourself;
 -Select other and copy/paste the link in the text box, select the domain.
 
 -Then script will run like normal until the website realizes the card won't work and ask for a new one. 
+
+
+# Known errors
+
+If no chrome browser opens when launching the script.bat, please update chrome, then it should work properly 
